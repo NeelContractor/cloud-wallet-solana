@@ -7,10 +7,8 @@ import RPC from "@/utils/solanaRPC";
 import { getDefaultExternalAdapters } from "@web3auth/default-solana-adapter";
 import { SolanaPrivateKeyProvider } from "@web3auth/solana-provider";
 import { clusterApiUrl, Connection, LAMPORTS_PER_SOL, PublicKey, SystemProgram, Transaction } from "@solana/web3.js";
-import Image from "next/image";
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
-import { send } from "process";
 
 const clientId = "BPi5PB_UiIZ-cPz1GtV5i1I2iOSOHuimiXBI0e-Oe_u6X3oVAbCiAZOTEBtTXw4tsluTITPqA8zMsfxIKMjiqNQ";
 
@@ -33,7 +31,6 @@ function App() {
   const [user, setUser] = useState<Partial<AuthUserInfo> | null>(null);
   const [balance, setBalance] = useState<number>(0);
   const [publicKey, setPublicKey] = useState<string[] | null>(null);
-  const [showUserData, setShowUserData] = useState<boolean>(false);
   const [copySuccess, setCopySuccess] = useState<string | null>(null);
   const [sendTo, setSendTo] = useState<string>("");
   const [sendAmount, setSendAmount] = useState<string>("");
@@ -74,7 +71,7 @@ function App() {
         });
 
         const adapters = getDefaultExternalAdapters({ options: { clientId, chainConfig } });
-        adapters.forEach((adapter: IAdapter<any>) => web3authInstance.configureAdapter(adapter));
+        adapters.forEach((adapter: IAdapter<string>) => web3authInstance.configureAdapter(adapter));
 
         setWeb3auth(web3authInstance);
         await web3authInstance.initModal();
@@ -349,7 +346,6 @@ const handler = async () => {
         </div>
 
           <button onClick={getPrivateKey} className="card">Get Private Key</button>
-          {/* <button onClick={logout} className="card">Log Out</button> */}
         </div>
       </div>
     </div>
@@ -372,7 +368,7 @@ const handler = async () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Source Code
+          MPC Docs
         </a>
       </footer>
     </div>
