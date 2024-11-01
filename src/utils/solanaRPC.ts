@@ -55,7 +55,7 @@ export default class SolanaRpc {
     }
   };
 
-  sendTransaction = async (transaction?: Transaction, connection?: Connection): Promise<string> => {
+  sendTransaction = async (): Promise<string> => {
     try {
       const solanaWallet = new SolanaWallet(this.provider);
 
